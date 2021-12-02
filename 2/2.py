@@ -1,22 +1,25 @@
 import sys
 from util.read_input import read_input
+from typing import Tuple, Dict, Callable
 
 
-def read_submarine_input(f):
+def read_submarine_input(f: str):
     return [
         (command_type, int(inc))
         for (command_type, inc) in [line.split(" ") for line in read_input(f)]
     ]
 
 
-basic_position_increments = {
+basic_position_increments: Dict[
+    str, Callable[[Tuple[int, int], int], Tuple[int, int]]
+] = {
     "forward": lambda pos, x: (pos[0] + x, pos[1]),
     "up": lambda pos, x: (pos[0], pos[1] - x),
     "down": lambda pos, x: (pos[0], pos[1] + x),
 }
 
 
-def calculate_basic_position(f):
+def calculate_basic_position(f: str):
     pos = (0, 0)
     for command_type, inc in read_submarine_input(f):
         pos = basic_position_increments[command_type](pos, inc)
@@ -24,14 +27,16 @@ def calculate_basic_position(f):
     return x * y
 
 
-complex_position_increments = {
+complex_position_increments: Dict[
+    str, Callable[[Tuple[int, int], int, int], Tuple[Tuple[int, int], int]]
+] = {
     "forward": lambda pos, aim, x: ((pos[0] + x, pos[1] + aim * x), aim),
     "up": lambda pos, aim, x: (pos, aim - x),
     "down": lambda pos, aim, x: (pos, aim + x),
 }
 
 
-def calculate_complex_position(f):
+def calculate_complex_position(f: str):
     pos = (0, 0)
     aim = 0
     for command_type, inc in read_submarine_input(f):

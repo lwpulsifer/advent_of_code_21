@@ -61,8 +61,6 @@ def calculate_life_support_rating(nums: List[List[int]]) -> int:
                 break
             elif len(remaining_nums) == 0:
                 print("No more numbers")
-            if sums is None:
-                return 0
     print(filtered_nums)
     return filtered_nums["oxygen"] * filtered_nums["co2"]
 

@@ -28,11 +28,17 @@ def read_vent_input(f: str):
     return vents
 
 
-def move_towards(p1: Point, p2: Point) -> Point:
-    if p1 == p2:
-        return p1
-    p1x, p1y = p1
-    p2x, p2y = p2
+def move_towards(start_point: Point, target_point: Point) -> Point:
+    """
+    Given a starting point and a target point, calculates the next point
+    on a straight line from the starting point to the target. Assumes that
+    the points either have the same x- or y-coordinate, or that the line
+    between them is a 45-degree diagonal line.
+    """
+    if start_point == target_point:
+        return start_point
+    p1x, p1y = start_point
+    p2x, p2y = target_point
 
     if p1x < p2x:
         newx = p1x + 1

@@ -38,9 +38,8 @@ if __name__ == "__main__":
         ("6.txt", 256): 1644286074024,
     }
     for (f, num_days), expected_out in test_cases.items():
-        if (
-            actual_out := simulate_lanternfish(read_lanternfish_input(f), num_days)
-        ) != expected_out:
+        lantern_fish = read_lanternfish_input(f)
+        if (actual_out := simulate_lanternfish(lantern_fish, num_days)) != expected_out:
             print(f"Expected {expected_out}, got {actual_out}")
             sys.exit(1)
     else:
